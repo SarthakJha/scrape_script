@@ -15,8 +15,8 @@ src_files = glob.glob("/Users/srathakjha/Downloads/*.pdf")
 
 
 # input
-username = "190905191"
-password = "Matarani@1"
+username = "xxx"
+password = "xxxx"
 
 chrome_options = Options()
 # chrome_options.add_argument('headless')
