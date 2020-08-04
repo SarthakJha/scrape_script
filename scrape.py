@@ -9,14 +9,14 @@ import glob
 from bs4 import BeautifulSoup
 
 src_dir = "/Users/srathakjha/Downloads"
-dest_dir = "/Users/srathakjha/Desktop/slcm_MTTN/notices/"
+dest_dir = "/Users/srathakjha/Desktop/flask_slcm_MTTN/notices/"
 
 src_files = glob.glob("/Users/srathakjha/Downloads/*.pdf")
 
 
 # input
-username = "xxx"
-password = "xxxx"
+username = "190905191"
+password = "2001@Billion"
 
 chrome_options = Options()
 # chrome_options.add_argument('headless')
@@ -39,7 +39,6 @@ login_btn.click()
 time.sleep(10)
 
 # Deletes all directories in /notices
-
 shutil.rmtree(dest_dir)
 print("notices dir Deleted")
 
@@ -78,18 +77,35 @@ while(page < 5):
         downloadbtn.click()
         time.sleep(5)
 
+# Creates page directory
     os.mkdir(dest_dir+str(page))
     print(str(page) + " dir created")
     src_files2 = glob.glob("/Users/srathakjha/Downloads/*.pdf")
     print("src_files2: ")
     print(src_files2)
 
+# Moves files to the page directory
     for files in src_files2:
         destination = dest_dir+str(page)
         shutil.move(src=files, dst=destination)
-        print(files + " moved to "+destination)
+        # print(files + " moved to "+destination)
+
     print(os.listdir(dest_dir+str(page)))
     nextl = two_button[page].find_element_by_tag_name('a')
     nextl.click()
     print("next page")
     page = page + 1
+
+# renaming every file with there <index>.pdf
+dest_2 = glob.glob("/Users/srathakjha/Desktop/flask_slcm_MTTN/notices/*")
+for j in dest_2:
+    print(j)
+    dest_2_files = glob.glob(j+"/*.pdf")
+    print(dest_2_files)
+    index = 0
+    for k in dest_2_files:
+        index = index + 1
+        print(index)
+        renamedFile = j + "/" + str(index) + ".pdf"
+        print(renamedFile)
+        os.rename(k, renamedFile)
